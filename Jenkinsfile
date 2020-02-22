@@ -16,7 +16,7 @@ pipeline {
     }
     environment {
       REMOTE_HOST = '23.101.15.242'
-      DOCKER_REPO_URL = 'docker.pkg.github.com/zhouwenyang/boat-house'
+      DOCKER_REPO_URL = 'docker.pkg.github.com/hack-yang/boat-house'
       CREDS_GITHUB_REGISTRY = credentials('creds-github-registry')
       CREDS_DEV_SERVER = credentials('creds-dev-server')
       def server=''
