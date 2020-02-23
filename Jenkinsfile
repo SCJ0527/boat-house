@@ -75,6 +75,7 @@ pipeline {
           echo "restarting new docker containers...."
           sshCommand remote: server, command: "docker-compose -f docker-compose-template.yaml -p boathouse up -d"
           echo "successfully started!"
+          
         }
 
       }
