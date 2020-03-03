@@ -16,7 +16,7 @@ spec:
         app: statistics-service-db
     spec:
       containers:
-      - image: docker.pkg.github.com/zhouwenyang/boat-house/postgres:9.4
+      - image: postgres:9.4
         name: statistics-service-db
       restartPolicy: Always
       imagePullSecrets:
