@@ -73,8 +73,6 @@ pipeline {
 
       }
     }
-<<<<<<< HEAD
-=======
 
     post {
       always {
@@ -82,7 +80,6 @@ pipeline {
       }
     }
     
->>>>>>> upstream/master
 
     stage('deploy-test') {
       input {
@@ -110,8 +107,8 @@ pipeline {
 
   }
   environment {
-    REMOTE_HOST = '23.101.15.242'
-    DOCKER_REPO_URL = 'docker.pkg.github.com/hack-yang/boat-house'
+    REMOTE_HOST = '52.237.75.104'
+    DOCKER_REPO_URL = 'docker.pkg.github.com/zhouwenyang/boat-house'
     CREDS_GITHUB_REGISTRY = credentials('creds-github-registry')
     CREDS_DEV_SERVER = credentials('creds-dev-server')
     server = 'test'
