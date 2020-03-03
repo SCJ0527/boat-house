@@ -29,19 +29,12 @@ pipeline {
           }
         }
 
-        stage('build-statistics-service') {
-          steps {
-            sh "docker build -f statistics-service/api/Dockerfile -t ${DOCKER_REPO_URL}/statistics_service_api:${env.BRANCH_NAME}-${env.BUILD_ID} -t ${DOCKER_REPO_URL}/statistics_service_api:latest statistics-service/api"
-            sh "docker build -f statistics-service/worker/Dockerfile -t ${DOCKER_REPO_URL}/statistics_service_worker:${env.BRANCH_NAME}-${env.BUILD_ID} -t ${DOCKER_REPO_URL}/statistics_service_worker:latest statistics-service/worker"
-            sh "docker login docker.pkg.github.com -u ${CREDS_GITHUB_REGISTRY_USR} -p ${CREDS_GITHUB_REGISTRY_PSW}"
-            echo 'push service api...'
-            sh "docker push ${DOCKER_REPO_URL}/statistics_service_api:latest"
-            sh "docker push ${DOCKER_REPO_URL}/statistics_service_api:${env.BRANCH_NAME}-${env.BUILD_ID}"
-            echo 'push service worker...'
-            sh "docker push ${DOCKER_REPO_URL}/statistics_service_worker:latest"
-            sh "docker push ${DOCKER_REPO_URL}/statistics_service_worker:${env.BRANCH_NAME}-${env.BUILD_ID}"
-          }
-        }
+            stage('build-product-service') {
+              steps {
+                sh "docker-compose -f product-service/api/docker-compose.build.yaml up"
+                junit 'product-service/api/target/surefire-reports/**/TEST-*.xml'
+                cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'product-service/api/target/site/cobertura/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+                sh "docker build -f product-service/api/Dockerfile.image -t ${DOCKER_REPO_URL}/product_service_api:${env.BRANCH_NAME}-${env.BUILD_ID} -t ${DOCKER_REPO_URL}/product_service_api:latest product-service/api"
 
         stage('build-product-service') {
           steps {
@@ -79,6 +72,16 @@ pipeline {
 
       }
     }
+<<<<<<< HEAD
+=======
+
+    post {
+      always {
+        sh "sudo rm -rf product-service/api/target"
+      }
+    }
+    
+>>>>>>> upstream/master
 
     stage('deploy-test') {
       input {
