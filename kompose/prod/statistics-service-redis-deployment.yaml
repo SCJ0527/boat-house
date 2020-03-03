@@ -15,7 +15,7 @@ spec:
         app: statistics-service-redis
     spec:
       containers:
-      - image: docker.pkg.github.com/zhouwenyang/boat-house/redis:alpine
+      - image: redis:alpine
         name: redis
         ports:
         - containerPort: 6379
