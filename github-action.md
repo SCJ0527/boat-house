@@ -1,4 +1,4 @@
-# github action使用教程
+# github action使用教程222
 ## 背景
 
 为了改进jenkins需要搭建独立服务器，还需要专门的CI服务器进行打包的痛点。使用github action可以不用搭建专门的jenkins服务器，以及相应的CI服务器。github通过yml格式的文档就可以完成Jenkins server+CI server的所有功能。来达到减少维护量和服务器成本的目的。
@@ -26,6 +26,10 @@
 具体token权限详见参考文档
 
 在每次提交的时候，github就会启动相应的yml对应的流程进行构建。可以点击项目的action进行过程查看。
+
+## TAG
+
+注意由于项目中使用了Jenkins做编译打包，为了避免Github Action与Jenkins有冲突，所以我们在Github Action流水线打标签时添加了CI关键词，Github Action仅仅用于编译、打包的验证，不用作实际部署。
 
 ## 参考文档
 http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html
